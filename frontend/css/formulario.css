@@ -1,0 +1,23 @@
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.formulario__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--color-texto-suave);
+}
+
+.formulario__entrada,
+.formulario__selector {
+  font: inherit;
+  padding: 7px 9px;
+  border: 1px solid var(--color-borde-input);
+  border-radius: 6px;
+  background: var(--color-superficie);
+}

@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav__ruta {
+  border: 0;
+  padding: 10px 18px;
+  background: transparent;
+  color: var(--color-texto-claro);
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+}
+
+.nav__ruta--inactivo {
+  opacity: 0.9;
+}
+
+.nav__ruta--activo {
+  background: var(--color-fondo);
+  color: var(--color-primario);
+  font-weight: 600;
+  opacity: 1;
+}

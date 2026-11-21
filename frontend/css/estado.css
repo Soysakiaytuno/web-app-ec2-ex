@@ -1,0 +1,29 @@
+.estado {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #eeeeee;
+}
+
+.estado--available,
+.estado--confirmed {
+  background: var(--color-exito-fondo);
+  color: var(--color-exito);
+}
+
+.estado--maintenance,
+.estado--cancelled {
+  background: var(--color-peligro-fondo);
+  color: var(--color-peligro);
+}
+
+.estado--checked_in {
+  background: #dde9f4;
+  color: #1d5a8a;
+}
+
+.estado--checked_out {
+  background: #ececec;
+  color: var(--color-texto-suave);
+}

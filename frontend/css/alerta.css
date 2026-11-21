@@ -1,0 +1,12 @@
+.alerta {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background: var(--color-exito-fondo);
+  color: var(--color-exito);
+}
+
+.alerta--error {
+  background: var(--color-peligro-fondo);
+  color: var(--color-peligro);
+}
