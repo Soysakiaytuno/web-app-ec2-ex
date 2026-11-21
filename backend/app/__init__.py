@@ -6,6 +6,7 @@ from .models import db
 from .controllers.room_controller import room_bp
 from .controllers.guest_controller import guest_bp
 from .controllers.reservation_controller import reservation_bp
+from .service.exceptions import ServiceError
 from .seed import seed
 
 
@@ -25,6 +26,10 @@ def create_app(overrides=None):
     @app.get("/api/health")
     def health():
         return jsonify({"status": "ok"})
+
+    @app.errorhandler(ServiceError)
+    def handle_service_error(error):
+        return jsonify({"error": error.message}), error.status_code
 
     @app.errorhandler(404)
     def not_found(_error):
