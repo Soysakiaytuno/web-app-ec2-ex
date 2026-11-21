@@ -1,6 +1,7 @@
 from ..repository import reservation_repo
 from .create_reservation import CreateReservationUseCase
 from .exceptions import NotFoundError
+from .reservation_states import get_reservation_state
 
 
 def list_reservations(status=None, guest_id=None):
@@ -20,20 +21,20 @@ def create_reservation(data):
 
 def cancel_reservation(reservation_id):
     reservation = get_reservation(reservation_id)
-    reservation.status = "cancelled"
+    get_reservation_state(reservation).cancel(reservation)
     reservation_repo.commit()
     return reservation
 
 
 def check_in_reservation(reservation_id):
     reservation = get_reservation(reservation_id)
-    reservation.status = "checked_in"
+    get_reservation_state(reservation).check_in(reservation)
     reservation_repo.commit()
     return reservation
 
 
 def check_out_reservation(reservation_id):
     reservation = get_reservation(reservation_id)
-    reservation.status = "checked_out"
+    get_reservation_state(reservation).check_out(reservation)
     reservation_repo.commit()
     return reservation
