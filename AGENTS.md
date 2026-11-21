@@ -12,4 +12,5 @@
 
 ## 2. Diseño SOLID y Código Limpio (ej. `service/` y lógica de negocio)
 1. **Responsabilidad Única (SRP) en operaciones complejas**: No mezclar validaciones extensas y creación/orquestación dentro de una sola función (ej. `create_reservation`). Extraerlas a su propio archivo y clase dedicada (separando validador y creador/caso de uso).
-2. **Evitar `if` anidados**: Usar retornos tempranos (*guard clauses*) y validaciones planas. Cuando existan múltiples reglas o variantes condicionales, proponer e implementar un patrón de diseño adecuado (*Chain of Responsibility*, *Specification*, *Strategy*, etc.).
+2. **Errores de reglas de negocio (`422`)**: Toda regla de negocio que se implemente debe lanzar `BusinessRuleError` (HTTP `422`).
+3. **Buenas prácticas y criterio técnico**: Mantener buenas prácticas de programación (código limpio, legible, mantenible y patrones adecuados cuando corresponda). Si una indicación del usuario va en contra de las buenas prácticas, se debe **refutar y proponer la alternativa correcta** antes de implementarla.
