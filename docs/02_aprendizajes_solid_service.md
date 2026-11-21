@@ -10,3 +10,5 @@
    - Mantener buenas prácticas de programación (código limpio, legible y patrones adecuados cuando corresponda), refutando y proponiendo alternativas cuando una indicación no vaya por ese camino.
 4. **Reglas generales en raíz y `docs/`**:
    - El flujo de trabajo y los principios SOLID aplican tanto a backend como a frontend, por lo que quedan documentados en `AGENTS.md` (raíz) y en `docs/`.
+5. **Validar casos borde contra tests existentes**:
+   - Antes de definir el comportamiento límite de una nueva regla de negocio (ej. `<=` vs `<` en fechas), revisar los tests existentes (`test_api.py`, etc.) para detectar contratos ya asumidos por el sistema.
