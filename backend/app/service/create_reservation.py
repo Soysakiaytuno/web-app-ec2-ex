@@ -27,6 +27,12 @@ def parse_reservation_inputs(data):
     return room_id, guest_id, check_in, check_out, guests_count
 
 
+def validate_check_in_not_in_past(check_in):
+    """Regla #3: la fecha de llegada no puede ser anterior a la fecha actual."""
+    if check_in < date.today():
+        raise BusinessRuleError("La fecha de reserva no puede ser anterior a la actual")
+
+
 def validate_date_range(check_in, check_out):
     """Regla #2: la fecha de salida debe ser estrictamente posterior a la de llegada."""
     if check_out <= check_in:
@@ -39,6 +45,7 @@ class CreateReservationUseCase:
     def execute(self, data):
         validate_required_fields(data)
         room_id, guest_id, check_in, check_out, guests_count = parse_reservation_inputs(data)
+        validate_check_in_not_in_past(check_in)
         validate_date_range(check_in, check_out)
 
         room = room_repo.get_by_id(room_id)

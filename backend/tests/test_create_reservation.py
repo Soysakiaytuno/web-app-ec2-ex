@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from app.service.create_reservation import validate_date_range
+from app.service.create_reservation import validate_check_in_not_in_past, validate_date_range
 from app.service.exceptions import BusinessRuleError
 
 
@@ -51,6 +51,29 @@ def test_api_create_reservation_rejects_same_day_checkout(client, room, guest):
         "guest_id": guest["id"],
         "check_in": start.isoformat(),
         "check_out": start.isoformat(),
+        "guests_count": 2,
+    })
+    assert res.status_code == 422
+    assert "error" in res.get_json()
+
+
+def test_validate_check_in_rejects_past_date():
+    with pytest.raises(BusinessRuleError) as exc:
+        validate_check_in_not_in_past(date.today() - timedelta(days=1))
+    assert exc.value.status_code == 422
+
+
+def test_validate_check_in_accepts_today():
+    validate_check_in_not_in_past(date.today())
+
+
+def test_api_create_reservation_rejects_past_check_in(client, room, guest):
+    past = date.today() - timedelta(days=1)
+    res = client.post("/api/reservations", json={
+        "room_id": room["id"],
+        "guest_id": guest["id"],
+        "check_in": past.isoformat(),
+        "check_out": (past + timedelta(days=2)).isoformat(),
         "guests_count": 2,
     })
     assert res.status_code == 422
