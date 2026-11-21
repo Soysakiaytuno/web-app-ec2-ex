@@ -20,3 +20,10 @@ class NotFoundError(ServiceError):
 class ConflictError(ServiceError):
     def __init__(self, message: str):
         super().__init__(message, status_code=409)
+
+
+class BusinessRuleError(ServiceError):
+    """Excepción para incumplimiento de reglas de negocio (HTTP 422)."""
+
+    def __init__(self, message: str = "La operación incumple una regla de negocio"):
+        super().__init__(message, status_code=422)
